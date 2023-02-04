@@ -19,27 +19,23 @@ export class Player{
     }
     update(input){
     
+        
         this.x += this.vel_x;
         this.y += this.vel_y;
-
         if(input.includes("ArrowRight")) this.vel_x+= 0.05;
         else if (input.includes("ArrowLeft")) this.vel_x-=0.05;
         else this.speed = 0;
         if(this.x<0) this.x = 0;
         if(this.x > this.game.width - this.width) this.x=this.game.width-this.width;
-
         if(input.includes("ArrowUp")) this.vel_y-= 0.05;
         else if (input.includes("ArrowDown")) this.vel_y += 0.05;
         else this.speed = 0;
         if(this.y<0) this.y = 0;
         if(this.y> this.game.height - this.height) this.y = this.game.height - this.height;
-        
         this.array = input
-        //console.log(this.array);
         
     }
     draw(context){
- 
         if(this.array.indexOf("ArrowLeft")){
             this.frameY = 0;
         }else
