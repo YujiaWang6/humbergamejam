@@ -18,6 +18,8 @@ export class Player{
 
     }
     update(input){
+    
+        
         this.x += this.vel_x;
         this.y += this.vel_y;
         if(input.includes("ArrowRight")) this.vel_x+= 0.05;
@@ -31,6 +33,7 @@ export class Player{
         if(this.y<0) this.y = 0;
         if(this.y> this.game.height - this.height) this.y = this.game.height - this.height;
         this.array = input
+        
     }
     draw(context){
         if(this.array.indexOf("ArrowLeft")){

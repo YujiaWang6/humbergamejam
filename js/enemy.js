@@ -21,8 +21,6 @@ export class Enemy{
         this.imageHeight = 22.5;
         this.frameX = 0;
         this.frameY = 0;
-
-
     }
     update(){
         //x and y speed and position
@@ -71,9 +69,6 @@ export class Enemy{
       this.x = this.canvas_width - this.width;
       this.vel_x -= 0.5;
     }
-
-
-
     }
     draw(context){
     

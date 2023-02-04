@@ -1,6 +1,7 @@
 import {Player} from "./player.js";
 import {InputHandler} from "./input.js";
 import {Enemy} from "./enemy.js";
+import {Target} from "./target.js";
 
 
 window.addEventListener("load", function(){
@@ -11,11 +12,8 @@ window.addEventListener("load", function(){
     canvas.height = 600;
     this.gameOver = false;
     var userChoice;
-    
- 
     class Game{
-        constructor(width,height){
-           
+        constructor(width,height){      
             this.width = width;
             this.height = height;
             this.player = new Player(this);
@@ -24,21 +22,22 @@ window.addEventListener("load", function(){
             this.numberOfEnemies = 10;
             this.gameOver = false;
             this.randon_postion_x = 0;
+            this.range_height_x = 50;
+            this.range_height_y = 50;
             for(let i=0; i<this.numberOfEnemies; i++){
                 this.randon_postion_x = Math.floor(Math.random() * (600 - 1 +1 )+ 1)
                 this.enemies.push(new Enemy(this,this.randon_postion_x));
             };
+            this.target = new Target(this);
         }
        
         update(){
-            
             this.player.update(this.input.keys);
-            
+            this.target.update(this);            
             for(let i=0; i<this.numberOfEnemies; i++){
                 this.enemies[i].update();
             };
-            
-            
+
         for(let i=0; i<this.numberOfEnemies; i++){
         if(
             game.enemies[i].x < game.player.x + game.player.width && 
@@ -47,34 +46,45 @@ window.addEventListener("load", function(){
             game.enemies[i].y + game.enemies[i].height > game.player.y
         ){
             console.log(this.gameOver);
-            this.gameOver = true;
-            
+            this.gameOver = true;      
              }
           }
-         
+          //check collision 
+          if(
+            game.target.x  < game.player.x + game.player.width &&
+            game.target.x + game.target.width + 250> game.player.x &&
+            game.target.y < game.player.y + game.player.height &&
+            game.target.y + game.target.height + 250 > game.player.y
+          ){
+            if(game.player.x > game.target.x + game.target.width + 100){
+                game.target.vel_y -= 0.4;
+                game.target.vel_x += 0.4;
+                console.log("1");
+            }
+            else if( game.player.x < game.target.x + game.target.width + 100){
+                game.target.vel_y += 0.4;
+                game.target.vel_x -= 0.4;
+                console.log("2");
+            }
+            
+          }
 
+        
         }
 
         draw(context){
             this.player.draw(context);
-
+            this.target.draw(context);
             for(let i=0; i<this.numberOfEnemies; i++){
                 this.enemies[i].draw(context);
             };
          }
-      
         }
-
     const game = new Game(canvas.width, canvas.height);
-    console.log(game);
-
     function animate(){
-       
-        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         if(game.gameOver==false){
             game.update();
-
             game.draw(ctx);
             requestAnimationFrame(animate);
         }else{
