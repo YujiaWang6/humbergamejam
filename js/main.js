@@ -1,6 +1,7 @@
 import {Player} from "./player.js";
 import {InputHandler} from "./input.js";
 import {Enemy} from "./enemy.js";
+import {Target} from "./target.js";
 
 
 window.addEventListener("load", function(){
@@ -22,21 +23,36 @@ window.addEventListener("load", function(){
 
             this.enemies = new Array();
             this.numberOfEnemies = 5;
+            
+            
 
             this.gameOver = false;
             
             for(let i=0; i<this.numberOfEnemies; i++){
                 this.enemies.push(new Enemy(this));
             };
+            this.target = new Target(this);
         }
        
         update(){
             
             this.player.update(this.input.keys);
             
+            
             for(let i=0; i<this.numberOfEnemies; i++){
                 this.enemies[i].update();
             };
+            this.target.update(this);
+            /*
+
+            var check = game.player.x - game.enemies[0].x;
+            var check1=game.player.x - game.enemies[1].x;
+            var check2=game.player.x - game.enemies[2].x;
+            var check3=game.player.x - game.enemies[3].x;
+            var check4=game.player.x - game.enemies[4].x;
+            if(check==0 || check1==0 || check2==0 || check3==0 ||check4==0){alert("a")};
+            console.log(check, check1, check2,check3,check4);
+            */
 
             if(this.input.keys.length >= 1){
         for(let i=0; i<this.numberOfEnemies; i++){
@@ -57,10 +73,12 @@ window.addEventListener("load", function(){
 
         draw(context){
             this.player.draw(context);
+            
 
             for(let i=0; i<this.numberOfEnemies; i++){
                 this.enemies[i].draw(context);
             };
+            this.target.draw(context);
 
          }
       

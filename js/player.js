@@ -19,7 +19,6 @@ export class Player{
     }
     update(input){
     
-        
         this.x += this.vel_x;
         this.y += this.vel_y;
 
@@ -36,6 +35,7 @@ export class Player{
         if(this.y> this.game.height - this.height) this.y = this.game.height - this.height;
         
         this.array = input
+        //console.log(this.array);
         
     }
     draw(context){
