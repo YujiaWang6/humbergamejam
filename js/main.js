@@ -12,6 +12,7 @@ window.addEventListener("load", function(){
     this.gameOver = false;
     var userChoice;
     
+ 
     class Game{
         constructor(width,height){
            
@@ -19,12 +20,9 @@ window.addEventListener("load", function(){
             this.height = height;
             this.player = new Player(this);
             this.input = new InputHandler();
-
             this.enemies = new Array();
             this.numberOfEnemies = 5;
-
             this.gameOver = false;
-            
             for(let i=0; i<this.numberOfEnemies; i++){
                 this.enemies.push(new Enemy(this));
             };
@@ -37,7 +35,7 @@ window.addEventListener("load", function(){
             for(let i=0; i<this.numberOfEnemies; i++){
                 this.enemies[i].update();
             };
-
+            
             if(this.input.keys.length >= 1){
         for(let i=0; i<this.numberOfEnemies; i++){
         if(
@@ -58,10 +56,9 @@ window.addEventListener("load", function(){
         draw(context){
             this.player.draw(context);
 
-            for(let i=0; i<this.numberOfEnemies; i++){
+            for(let i=0; i<5; i++){
                 this.enemies[i].draw(context);
             };
-
          }
       
         }
