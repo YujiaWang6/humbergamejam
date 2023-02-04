@@ -21,10 +21,12 @@ window.addEventListener("load", function(){
             this.player = new Player(this);
             this.input = new InputHandler();
             this.enemies = new Array();
-            this.numberOfEnemies = 5;
+            this.numberOfEnemies = 10;
             this.gameOver = false;
+            this.randon_postion_x = 0;
             for(let i=0; i<this.numberOfEnemies; i++){
-                this.enemies.push(new Enemy(this));
+                this.randon_postion_x = Math.floor(Math.random() * (600 - 1 +1 )+ 1)
+                this.enemies.push(new Enemy(this,this.randon_postion_x));
             };
         }
        
@@ -36,7 +38,7 @@ window.addEventListener("load", function(){
                 this.enemies[i].update();
             };
             
-            if(this.input.keys.length >= 1){
+            
         for(let i=0; i<this.numberOfEnemies; i++){
         if(
             game.enemies[i].x < game.player.x + game.player.width && 
@@ -49,14 +51,14 @@ window.addEventListener("load", function(){
             
              }
           }
-         }
+         
 
         }
 
         draw(context){
             this.player.draw(context);
 
-            for(let i=0; i<5; i++){
+            for(let i=0; i<this.numberOfEnemies; i++){
                 this.enemies[i].draw(context);
             };
          }

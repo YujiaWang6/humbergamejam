@@ -1,16 +1,16 @@
 var random_x = 0;
 var random_y = 0;
 export class Enemy{
-    constructor(game){
+    constructor(game, random_position_x){
         this.game = game;
         this.width = 28.8;
-        this.height = 22.5;
-        this.x = Math.random();
+         this.height = 22.5;
+        this.x = random_position_x;
         this.y = 0;
         this.speed = Math.random()*4-2;
-        this.angle = 0;
-        this.angleSpeed = Math.random()*0.005; //change speed
-        this.curve = Math.random()*5;
+       // this.angle = 0;
+       // this.angleSpeed = Math.random()*0.005; //change speed
+       // this.curve = Math.random()*5;
         this.vel_x = 0;
         this.vel_y = 0;
         this.canvas_width = 900;
@@ -38,12 +38,11 @@ export class Enemy{
         if(this.y <0) this.y = this.curve * Math.cos(this.angle);
         */
     this.x += this.vel_x;
-    console.log(this.x);
     this.y += this.vel_y;
     random_x = Math.floor(Math.random() * (8 - -10 + 1)) + -9;
     random_y = Math.floor(Math.random() * (8 - -10 + 1)) + -9;
-    this.vel_x += random_x * 0.02;
-    this.vel_y += random_y * 0.02;
+    this.vel_x += random_x * 0.04;
+    this.vel_y += random_y * 0.03;
     // Set conditon for gravity , if player height + player positon Y + player velpcity.y smaller than height of canavas)
     if (
       this.y + this.height + this.vel_y <=
