@@ -31,7 +31,6 @@ window.addEventListener("load", function(){
                 this.enemies.push(new Enemy(this,this.randon_postion_x));
             };
             this.target = new Target(this);
-            this.target = new Target(this);
         }
        
         update(){
