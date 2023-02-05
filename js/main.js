@@ -2,7 +2,7 @@ import {Player} from "./player.js";
 import {InputHandler} from "./input.js";
 import {Enemy} from "./enemy.js";
 import {Target} from "./target.js";
-import {Target} from "./target.js";
+
 
 
 window.addEventListener("load", function(){
