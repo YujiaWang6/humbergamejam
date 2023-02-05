@@ -15,6 +15,8 @@ export class Player{
         this.frameX = 0;
         this.frameY = 0;
         this.array = [];
+        this.canvas_width = 900;
+        this.canvas_height = 600;
 
     }
     update(input){
@@ -33,6 +35,31 @@ export class Player{
         if(this.y<0) this.y = 0;
         if(this.y> this.game.height - this.height) this.y = this.game.height - this.height;
         this.array = input
+        //updated
+        if (
+            this.y >= this.canvas_height - this.height
+        ) {
+            this.vel_y = 0;
+            this.vel_y -=  1.5;
+           
+        }
+        // Check If Player move out of tank . set player_velocity bounce back down
+        if (this.y <= 0) {
+            this.y = 0;
+            this.vel_y += 1;
+        }
+        // Check If Player move to left and hit the wall set position 0 / set player_velocity bounce back out to avoid object stick on it
+        if (this.x <= 0) {
+            this.x = 0;
+            this.vel_x += 1.5;
+        }
+        // Check If Player move to right and hit the all set postion at that spot /set player_velocity bounce back out to avoid object stick on it
+        if (this.x >= this.canvas_width - this.width ) {
+            this.x = this.canvas_width - this.width;
+            this.vel_x = 0;
+            this.vel_x -= 1.5;
+       
+        }
         
     }
     draw(context){
