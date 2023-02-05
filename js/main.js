@@ -12,6 +12,7 @@ window.addEventListener("load", function(){
     canvas.width = 900;
     canvas.height = 600;
     this.gameOver = false;
+    this.targetCatch = false;
     var userChoice;
     class Game{
         constructor(width,height){      
@@ -68,6 +69,15 @@ window.addEventListener("load", function(){
                 game.target.vel_x -= 0.4;
                 console.log("2");
             }
+              if(
+                game.target.x  < game.player.x + game.player.width &&
+                game.target.x + game.target.width> game.player.x &&
+                game.target.y < game.player.y + game.player.height &&
+                game.target.y + game.target.height > game.player.y
+                ){
+                    this.targetCatch = true;  
+                }
+            console.log(this.targetCatch);
             
           }
 
@@ -98,6 +108,13 @@ window.addEventListener("load", function(){
                 
             }else{cancelAnimationFrame(animate);}
         }
+        if(game.targetCatch===false){
+            game.update();
+            game.draw(ctx);
+            requestAnimationFrame(animate);   
+        }else{
+            cancelAnimationFrame(animate);
+            }
     }
     
     animate();
