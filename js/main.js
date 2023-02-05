@@ -24,6 +24,7 @@ window.addEventListener("load", function(){
             this.numberOfEnemies = 10;
 
             this.gameOver = false;
+            this.targetCatch = false;
             this.randon_postion_x = 0;
             this.range_height_x = 50;
             this.range_height_y = 50;
@@ -69,17 +70,18 @@ window.addEventListener("load", function(){
                 game.target.vel_x -= 0.4;
                 console.log("2");
             }
-              if(
+            
+          }
+            //check target and player position
+            if(
                 game.target.x  < game.player.x + game.player.width &&
                 game.target.x + game.target.width> game.player.x &&
                 game.target.y < game.player.y + game.player.height &&
                 game.target.y + game.target.height > game.player.y
                 ){
                     this.targetCatch = true;  
-                }
-            console.log(this.targetCatch);
+                }else{return this.targetCatch;}
             
-          }
 
         
         }
@@ -108,11 +110,8 @@ window.addEventListener("load", function(){
                 
             }else{cancelAnimationFrame(animate);}
         }
-        if(game.targetCatch===false){
-            game.update();
-            game.draw(ctx);
-            requestAnimationFrame(animate);   
-        }else{
+        if(game.targetCatch==true){
+            alert("You Win!");
             cancelAnimationFrame(animate);
             }
     }
