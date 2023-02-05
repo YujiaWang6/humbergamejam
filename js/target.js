@@ -24,37 +24,31 @@ export class Target{
         var random_y = Math.floor(Math.random() * (8 - -10 + 1)) + -9;
         this.vel_x += random_x * 0.02;
         this.vel_y += random_y * 0.02;
-        // Set conditon for gravity , if player height + player positon Y + player velpcity.y smaller than height of canavas)
-        if (
-          this.y + this.height + this.vel_y <=
-          this.canvas_height
-        ) {
-          //this.vel_y += 0.05;
-        } else {
-          this.vel_y = 0;
-        }
-        //
-        if (this.y >= 600) {
-          this.vel_x = 0;
-        }
-        // Check If this move out of tank . set this_velocity bounce back down
-        if (this.y <= 0) {
-          this.y = 0;
-          this.vel_y += 0.3;
-        }
-        // Check If this move to left and hit the wall set position 0 / set this_velocity bounce back out to avoid object stick on it
-        if (this.x < 0) {
-          this.x = 0;
-          this.vel_x += 0.3;
-        }
-        // Check If this move to right and hit the all set postion at that spot /set this_velocity bounce back out to avoid object stick on it
-        if (this.x > this.canvas_width - this.width) {
-          this.x = this.canvas_width - this.width;
-          this.vel_x -= 0.5;
-        }
-
-        // check collision 
-        console.log()
+       // move to bottom
+            if (this.y >= this.canvas_height - this.height ) {
+              //this.y =this.canvas_height - this.height ;
+              this.vel_y = 0;
+              this.vel_y -= 1.5;
+              console.log(this.y);
+            }
+            // Check If this move out of tank . set this_velocity bounce back down
+            if (this.y <= 0) {
+              this.y = 0;
+              this.vel_y = 0;
+              this.vel_y += 1;
+            }
+            // Check If this move to left and hit the wall set position 0 / set this_velocity bounce back out to avoid object stick on it
+            if (this.x <= 0) {
+              this.x = 0;
+              this.vel_x = 0;
+              this.vel_x += 1.5;
+            }
+            // Check If this move to right and hit the all set postion at that spot /set this_velocity bounce back out to avoid object stick on it
+            if (this.x >= this.canvas_width - this.width) {
+              this.x = this.canvas_width - this.width;
+              this.vel_x = 0;
+              this.vel_x -= 1.5;
+            }
     }
     draw(context){
         if(this.speed>0 ){
