@@ -14,6 +14,7 @@ window.addEventListener("load", function(){
     this.gameOver = false;
     this.targetCatch = false;
     var userChoice;
+    var winningUserChoice;
     class Game{
         constructor(width,height){      
             this.width = width;
@@ -98,22 +99,26 @@ window.addEventListener("load", function(){
     const game = new Game(canvas.width, canvas.height);
     function animate(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if(game.gameOver==false){
+        if(game.gameOver==false && game.targetCatch==false){
             game.update();
             game.draw(ctx);
             requestAnimationFrame(animate);
-        }else{
+        }else if(game.gameOver == true){
             cancelAnimationFrame(animate);
             userChoice = confirm("Game Over, Wanna another play?");
             if(userChoice === true){
                 window.location.reload();
                 
             }else{cancelAnimationFrame(animate);}
-        }
-        if(game.targetCatch==true){
-            alert("You Win!");
+        }else{
             cancelAnimationFrame(animate);
-            }
+            winningUserChoice = confirm("You Win! Wanna another play?")
+            if(winningUserChoice === true){
+                window.location.reload();
+                
+            }else{cancelAnimationFrame(animate);}
+        }
+        
     }
     
     animate();
