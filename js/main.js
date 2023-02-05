@@ -2,6 +2,7 @@ import {Player} from "./player.js";
 import {InputHandler} from "./input.js";
 import {Enemy} from "./enemy.js";
 import {Target} from "./target.js";
+import {Target} from "./target.js";
 
 
 window.addEventListener("load", function(){
@@ -20,6 +21,7 @@ window.addEventListener("load", function(){
             this.input = new InputHandler();
             this.enemies = new Array();
             this.numberOfEnemies = 10;
+
             this.gameOver = false;
             this.randon_postion_x = 0;
             this.range_height_x = 50;
@@ -28,6 +30,7 @@ window.addEventListener("load", function(){
                 this.randon_postion_x = Math.floor(Math.random() * (600 - 1 +1 )+ 1)
                 this.enemies.push(new Enemy(this,this.randon_postion_x));
             };
+            this.target = new Target(this);
             this.target = new Target(this);
         }
        
@@ -78,6 +81,7 @@ window.addEventListener("load", function(){
             for(let i=0; i<this.numberOfEnemies; i++){
                 this.enemies[i].draw(context);
             };
+
          }
         }
     const game = new Game(canvas.width, canvas.height);
